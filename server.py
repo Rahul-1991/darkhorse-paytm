@@ -120,7 +120,7 @@ def GetUserSubscriptionData():
                 responseJSONData = response.json()
                 if len(responseJSONData["payment_links"]) > 0:
                     for responseItem in responseJSONData.get("payment_links"):
-                        if responseItem.get('status') == 'paid':
+                        if responseItem.get('status') in ('paid', 'created'):
                             customer_data = responseItem.get('notes')
                             if customer_data.get('CustomerEmail') and customer_data.get('CustomerEmail') == email:
                                 paid_date = (datetime.fromtimestamp(responseItem.get('created_at')) + timedelta(days=365)).strftime('%d %b %Y')
